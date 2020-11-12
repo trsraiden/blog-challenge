@@ -54,10 +54,9 @@ app.post("/compose", function(req, res){
 
 app.get("/posts/:postName", function (req, res){
   posts.forEach(function(post){
-    console.log(_.lowerCase(post.title));
-    console.log(_.lowerCase(req.params.postName));
     if (_.lowerCase(post.title) === _.lowerCase(req.params.postName)){
-      console.log("Match Found!");
+      // const redirectAddress = "/posts/"+_.lowerCase(post.title);
+      res.render("posts", {post:post});
     }
   });
   // console.log(req.params.postName);
