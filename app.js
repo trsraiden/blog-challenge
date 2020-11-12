@@ -44,9 +44,11 @@ app.get("/compose", function(req, res){
 app.post("/compose", function(req, res){
   // console.log(req.body.postTitle);
   // console.log(req.body.postBody);
+  const postLink = "/posts/"+_.kebabCase(_.lowerCase(req.body.postTitle));
   const postContent = {
     title:req.body.postTitle,
-    body:req.body.postBody
+    body:req.body.postBody,
+    postLink:postLink
   };
   posts.push(postContent);
   res.redirect("/");
@@ -55,7 +57,6 @@ app.post("/compose", function(req, res){
 app.get("/posts/:postName", function (req, res){
   posts.forEach(function(post){
     if (_.lowerCase(post.title) === _.lowerCase(req.params.postName)){
-      // const redirectAddress = "/posts/"+_.lowerCase(post.title);
       res.render("posts", {post:post});
     }
   });
